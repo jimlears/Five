@@ -1,0 +1,303 @@
+
+/* 
+Base
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body, html, button, input, select, textarea {
+  background: none;
+  font-family: "Helvetica Neue", Arial, Verdana, Tahoma, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.2em;
+  line-height: 1.5em; 
+  margin: 0;
+  padding: 0;
+}
+
+.v-player-wrapper {
+  position: relative;
+  font-size: 16px;
+  width: 90%;
+  top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: pink;
+}
+
+/* 
+Icons
+*/
+
+@font-face {
+  font-family: 'ElegantIcons';
+  src:url('fonts/ElegantIcons.eot');
+  src:url('fonts/ElegantIcons.eot?#iefix') format('embedded-opentype'),
+    url('fonts/ElegantIcons.woff') format('woff'),
+    url('fonts/ElegantIcons.ttf') format('truetype'),
+    url('fonts/ElegantIcons.svg#ElegantIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="v-icon-"], [class*=" v-icon-"] {
+  font-family: 'ElegantIcons';
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.25em;
+  height: 44px;
+  width: 44px;
+  line-height: 44px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.v-icon-play:before { content: "\49"; }
+.v-icon-play:before { content: "\45"; }
+.v-icon-pause:before { content: "\5f"; }
+.v-icon-pause:before { content: "\60"; }
+.v-icon-skip:before { content: "\41"; }
+.v-icon-skip:before { content: "\39"; }
+.v-icon-vol-mute:before { content: "\78"; }
+.v-icon-vol-low:before { content: "\79"; }
+.v-icon-vol-high:before { content: "\7a"; }
+.v-icon-vol-mute, .v-icon-vol-low, .v-icon-vol-high {
+  font-size: .95em;
+}
+.v-icon-fullscreen:before { content: "\2d"; }
+.v-icon-fullscreen {
+  font-size: .95em;
+}
+
+/* 
+Structure
+*/
+
+.v-player-container {
+  position: absolute;
+  width: 100%; height: auto;
+  overflow: hidden;
+  background: #ccc;
+  font-size: 1em;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.v-player-sizing {
+  position: absolute;
+  width: 1em; height: 1em;
+  visibility: hidden;
+  font-size: 1em;
+}
+
+/* 
+Info
+*/
+
+.v-info-container {
+  position: absolute;
+  width: 100%; height: 80em;
+  left: 0; top: 0;
+  display: flex;
+  z-index: 999;
+}
+
+.v-info {
+  display: block;
+  font-size: 3em; 
+  z-index: 888;
+  position: absolute;
+  top: 1em; left: 1em;
+  color: white;
+  opacity: 1.0;
+  -webkit-transition: opacity .3s;
+  -moz-transition: opacity .3s;
+  -o-transition: opacity .3s;
+  -ms-transition: opacity .3s;
+  transition: opacity .3s;
+}
+
+.v-info p, .v-info h1 {
+/*  line-height: 3em; */
+  margin-top: 0em;
+  margin-bottom: 0.50em;
+}
+
+.v-info-time {
+  display: none;
+}
+
+/* 
+Tooltip 
+*/
+
+.v-tooltip-container {
+  position: absolute;
+  width: 100%; height: 10em;
+  left: 0; bottom: 10em;
+  color: white;
+  display: flex;
+  z-index: 999;
+}
+
+.v-tooltip {
+  display: block;
+  font-size: 3.5em;  
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 1.0;
+  text-shadow: #000 0 0 0.2em;
+}
+
+/* 
+Controls 
+*/
+
+.v-player-container:hover .v-controls {
+  opacity: 1.0;
+}
+
+.v-controls-container {
+  position: absolute;
+  width: 100%; height: 10em;
+  left: 0; bottom: 0;
+  display: flex;
+  z-index: 999;
+}
+
+.v-controls {
+  display: block;
+  font-size: 3.5em;  
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 5px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  opacity: 0.0;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  -ms-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+/* 
+Cover
+*/
+
+.v-cover-gradient {
+  z-index: 777;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 1.0;
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.33) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0.33))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.33) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.33) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.33) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.33) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#54000000',GradientType=0 ); /* IE6-9 */
+  -webkit-transition: opacity .3s;
+  -moz-transition: opacity .3s;
+  -o-transition: opacity .3s;
+  -ms-transition: opacity .3s;
+  transition: opacity .3s;
+}
+
+.v-player-container video {
+  width: 100%    !important;
+  height: auto   !important;
+}
+
+/* 
+Behaviors
+*/
+
+.v-is-hidden {
+  opacity: 0.0;
+}
+
+/* 
+UI Controls - todo: make these less generic and tie to classes
+*/
+
+input[type="range"] {
+  -webkit-appearance:none; 
+  -moz-apperance:none; 
+  width: 100%; 
+  height: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(32,124,229,1);
+  background: none;
+  /*box-shadow: 0 0 1px rgba(0,0,0,0.5)*/
+}
+
+.v-bar-scrub {
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.v-bar-scrub-p {
+  z-index: 998;
+  position: absolute;
+  left: 0; 
+  bottom: 0;
+}
+
+progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px; 
+  border: 0; 
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+progress[value]::-webkit-progress-value {
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(73,155,234,1)), color-stop(100%,rgba(32,124,229,1))); 
+  background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%); 
+}
+
+[class^="v-btn-"]:hover, [class*=" v-btn-"]:hover {
+  color: rgba(32,124,229,1);
+}

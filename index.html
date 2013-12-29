@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Video</title>
+  <link href="video.css" rel="stylesheet">
+</head>
+<body>
+  <div class="v-player-wrapper">
+    <div class="v-player-container">
+      <div class="v-player-sizing"></div>
+      
+      <div class="v-info-container">
+        <div class="v-info">
+          <p>You are watching
+            <h1 class="v-info-title">Holiday Foodie Gift Guide!</h1>
+          </p>
+          <div class="v-info-time">0</div>
+        </div>
+      </div>
+
+      <div class="v-tooltip-container">
+        <div class="v-tooltip"></div>
+      </div>
+
+      <div class="v-cover-gradient"></div>
+      
+      <div class="v-controls-container">
+        <div class="v-controls">
+          <input type="range" class="v-bar-scrub" min="0" max="100" value="0">
+          <progress class="v-bar-scrub-p" value="0" max="100"></progress> 
+          <span class="v-icon-play v-btn-playpause"></span>
+          <span class="v-icon-skip v-btn-skip"></span>
+          <span class="v-icon-vol-high v-btn-mute"></span>
+          <span class="v-icon-fullscreen v-btn-fullscreen"></span>
+        </div>
+      </div>
+
+      <video preload="auto" poster="http://videos.cloudfront.tastemade.com/2013/1213/1816/B342dBtpTW24Qyz6EjAreA/thumbnail.jpg">
+        <source src="http://videos.cloudfront.tastemade.com/2013/1213/1816/B342dBtpTW24Qyz6EjAreA/540-2500.mp4" type='video/mp4'>
+        <p>Video Playback Not Supported</p>
+      </video>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="video.js"></script>
+</body>
+</html>
